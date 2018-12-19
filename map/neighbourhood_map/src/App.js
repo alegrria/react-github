@@ -38,7 +38,8 @@ class App extends Component {
       this.state.venues.forEach(function(venue) {
         let marker = new google.maps.Marker({
           position: { lat: venue.location.lat, lng: venue.location.lng },
-          address: venue.location.formattedAddress,
+          address: venue.location.address? venue.location.address : 'Hamburg',
+          category: venue.categories[0]? venue.categories[0].name : ' no info about kitchen',
           map: map,
           venue: venue,
           id: venue.id,
@@ -54,7 +55,7 @@ class App extends Component {
       function populateInfoWindow(marker, infowindow) {
         if (infowindow.marker !== marker) {
           infowindow.marker = marker;
-          infowindow.setContent('<div>' + '<h3>'+ marker.name + '</h3>' + marker.address + '</div>');
+          infowindow.setContent('<div><h3>'+ marker.name + '</h3>' + marker.address + '<h4>' + marker.category + '</h3></div>');
           infowindow.open(map, marker);
           infowindow.addListener('closeclick',function(){
             infowindow.setMarker = null;
