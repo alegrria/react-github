@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    Helper.venues().then(response => {this.setState({ venues: response, cuisines: response.map(function(venue){if(venue.categories[0]){return venue.categories[0].name}else{return 'no info'}})});
+    Helper.venues().then(response => {this.setState({ venues: response, cuisines: response.map(function(venue){if(venue.categories[0]){return venue.categories[0].name}else{return 'no info'}}).filter((v, i, a) => a.indexOf(v) === i)});
     this.loadMap();
     window.initMap = this.initMap;
     })
@@ -74,7 +74,7 @@ class App extends Component {
       <div className="App">
         <Header/>
         <div id='map' aria-label="restaurant location map"></div>
-        <Footer/>
+        <Footer cuisines={this.state.cuisines.uniq}/>
       </div>
     );
   }
