@@ -7,6 +7,13 @@
   /* padding: 20%; */
 }
 
+#header {
+  height: 40px;
+  color: azure;
+  background-color: darkblue;
+  text-align: center;
+}
+
 html, body {
   height: 100%;
   margin: 0;

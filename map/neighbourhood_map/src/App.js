@@ -7,6 +7,7 @@ https://github.com/tomchentw/react-google-maps/issues/434 for solving google not
 import React, { Component } from 'react';
 import './App.css';
 import * as Helper from './Helper';
+import Header from './Header'
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
     console.log(this.state.venues)
     return (
       <div className="App">
+        <Header/>
         <div id='map'>
         </div>
 

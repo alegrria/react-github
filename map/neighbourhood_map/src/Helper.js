@@ -3,4 +3,4 @@ const apiCall = 'https://api.foursquare.com/v2/venues/search?client_id=O1W14F1AL
 export function venues() {
   return fetch(apiCall)
   .then(response => response.json().then(function(x){return x.response.venues}))
-  .catch(e => console.log(e))}
+  .catch(e => alert(e))}
