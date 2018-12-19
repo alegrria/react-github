@@ -4,3 +4,17 @@ export function venues() {
   return fetch(apiCall)
   .then(response => response.json().then(function(x){return x.response.venues}))
   .catch(e => alert("Something is wrong with your internet connection. Map cannot be displayed"))}
+
+
+// export function updateRestaurants(){
+//   const cSelect = document.getElementById('cuisines-select');
+//   const cIndex = cSelect.selectedIndex;
+//   const cuisine = cSelect[cIndex].value;
+//
+// }
+export function uniqueCategories(cuisines){
+  const ids = cuisines.map(cuisine => cuisine.id);
+  const uniqueIds = new Set(ids);
+  const result = Array.from(uniqueIds).filter(id => id !== undefined)
+  return result;
+}
