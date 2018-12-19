@@ -7,8 +7,7 @@
   /* padding: 20%; */
 }
 
-#header {
-  height: 40px;
+#header, #footer {
   color: azure;
   background-color: darkblue;
   text-align: center;

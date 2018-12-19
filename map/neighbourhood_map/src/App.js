@@ -8,15 +8,17 @@ import React, { Component } from 'react';
 import './App.css';
 import * as Helper from './Helper';
 import Header from './Header'
+import Footer from './Footer'
 
 class App extends Component {
 
   state = {
-    venues: []
+    venues: [],
+    cuisines: []
   }
 
   componentDidMount(){
-    Helper.venues().then(response => {this.setState({ venues: response});
+    Helper.venues().then(response => {this.setState({ venues: response, cuisines: response.map(function(venue){if(venue.categories[0]){return venue.categories[0].name}else{return 'no info'}})});
     this.loadMap();
     window.initMap = this.initMap;
     })
@@ -67,12 +69,12 @@ class App extends Component {
 
   render() {
     console.log(this.state.venues)
+    console.log(this.state.cuisines)
     return (
       <div className="App">
         <Header/>
-        <div id='map'>
-        </div>
-
+        <div id='map' aria-label="restaurant location map"></div>
+        <Footer/>
       </div>
     );
   }
