@@ -16,9 +16,10 @@ class App extends Component {
   }
 
   componentDidMount(){
+    Helper.venues().then(response => {this.setState({ venues: response});
     this.loadMap();
     window.initMap = this.initMap;
-    Helper.venues().then(response => this.setState({ venues: response}))
+    })
   }
 
   loadMap = () => {
@@ -29,7 +30,38 @@ class App extends Component {
     let map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.548729, lng: 9.978558},
       zoom: 14
-    })
+    });
+    let markers = [];
+    let infowindow = new google.maps.InfoWindow();
+    let bounds = new google.maps.LatLngBounds();
+    if(this.state.venues){
+      this.state.venues.forEach(function(venue) {
+        let marker = new google.maps.Marker({
+          position: { lat: venue.location.lat, lng: venue.location.lng },
+          address: venue.location.formattedAddress,
+          map: map,
+          venue: venue,
+          id: venue.id,
+          name: venue.name,
+          animation: google.maps.Animation.DROP
+        });
+        markers.push(marker);
+        bounds.extend(marker.position);
+        marker.addListener('click', function(){
+          populateInfoWindow(this, infowindow)
+        })
+      });
+      function populateInfoWindow(marker, infowindow) {
+        if (infowindow.marker !== marker) {
+          infowindow.marker = marker;
+          infowindow.setContent('<div>' + '<h3>'+ marker.name + '</h3>' + marker.address + '</div>');
+          infowindow.open(map, marker);
+          infowindow.addListener('closeclick',function(){
+            infowindow.setMarker = null;
+          });
+        }
+      }
+    }
   }
 
   render() {
