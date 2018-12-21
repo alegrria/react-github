@@ -28,26 +28,23 @@ class App extends Component {
         {return {id: venue.categories[0].id, name: venue.categories[0].name}}),
       allVenues: response.filter(venue => venue.categories.length !== 0)
     })
-    this.loadMap();
-    window.initMap = this.initMap;
-    })
+    this.loadMap()})
   }
 
   updateRestaurants(restaurants, value) {
     if(value !== 'all'){let newRestaurants = restaurants.filter(restaurant => restaurant.categories[0].id === value);
-      this.setState({venues: newRestaurants})
+      this.setState({venues: newRestaurants}, () => {return this.initMap()})
     } else {
-      this.setState({venues: restaurants})}
-    this.initMap();
-    console.log(this.state.venues)
+      this.setState({venues: restaurants},() => {return this.initMap()})}
   }
 
   loadMap = () => {
     createScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCGxJxfJmNOm9iN23fX-nt4O0Sg762ByZU&v=3&callback=initMap');
+    window.initMap = this.initMap;
   }
 
   initMap = () => {
-    console.log(this.state.venues)
+    // console.log(this.state.venues)
     let map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.548729, lng: 9.978558},
       zoom: 14
@@ -117,6 +114,5 @@ class App extends Component {
     script.defer = true;
     index.parentNode.insertBefore(script, index)
   }
-
 
 export default App;

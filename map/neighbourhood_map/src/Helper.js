@@ -8,8 +8,7 @@ export function venues() {
 export function uniqueCategories(cuisines){
   const result = cuisines.reduce((current, next)=>{
     if(!current.some(a=> a.name === next.name)){
-      current.push(next);
-      }
-      return current;
-      },[]);
-  return result}
+      current.push(next)}
+      return current},[]);
+  return result
+}
