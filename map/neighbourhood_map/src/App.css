@@ -15,6 +15,12 @@
   font-family: "Arial Black", Gadget, sans-serif
 }
 
+#restaurants {
+  color: azure;
+  background-color: darkblue;
+  font-family: "Arial Black", Gadget, sans-serif
+}
+
 html, body {
   height: 100%;
   margin: 0;

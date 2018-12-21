@@ -100,7 +100,7 @@ class App extends Component {
       <div className="App">
         <Header/>
         <div id='map' aria-label="restaurant location map"></div>
-        <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants}/>
+        <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants} selection={this.state.venues}/>
       </div>
     );
   }

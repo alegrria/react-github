@@ -4,14 +4,11 @@ import PropTypes from 'prop-types';
 
 class Footer extends Component {
 
-  state= {
-    cuisineId: ''
-  }
-
   static propTypes = {
     restos: PropTypes.array.isRequired,
     results: PropTypes.array.isRequired,
-    updateRestaurants: PropTypes.func.isRequired
+    updateRestaurants: PropTypes.func.isRequired,
+    selection: PropTypes.array.isRequired
   };
 
   handleChange = (event) => {
@@ -19,16 +16,17 @@ class Footer extends Component {
   }
 
   render (){
-      // console.log(this.props.results)
-      // console.log(this.props.restos)
       return (
       <div id="footer">
         <h2>Listings</h2>
         <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
-            <option key='empty' value='all'>Nothing selected</option>
+            <option key='empty' value='nothing'>Nothing selected</option>
             <option key='all' value='all'>All Restaurants</option>
             {this.props.results.map(cuisine => <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>)}
         </select>
+        <div id='restaurants'>
+          {this.props.selection && this.props.selection.map(venue => <p key={venue.id}>{venue.name}</p>)}
+        </div>
       </div>
   )}
 }
