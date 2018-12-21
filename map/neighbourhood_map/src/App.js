@@ -35,12 +35,11 @@ class App extends Component {
 
   updateRestaurants(restaurants, value) {
     if(value !== 'all'){let newRestaurants = restaurants.filter(restaurant => restaurant.categories[0].id === value);
-    this.setState({venues: newRestaurants})
-  } else {
-    this.setState({venues: restaurants})
-  }
-    this.loadMap();
-    window.initMap = this.initMap;
+      this.setState({venues: newRestaurants})
+    } else {
+      this.setState({venues: restaurants})}
+    this.initMap();
+    console.log(this.state.venues)
   }
 
   loadMap = () => {
@@ -48,6 +47,7 @@ class App extends Component {
   }
 
   initMap = () => {
+    console.log(this.state.venues)
     let map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.548729, lng: 9.978558},
       zoom: 14

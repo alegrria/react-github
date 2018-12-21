@@ -25,6 +25,7 @@ class Footer extends Component {
       <div id="footer">
         <h2>Listings</h2>
         <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
+            <option key='empty' value='all'>Nothing selected</option>
             <option key='all' value='all'>All Restaurants</option>
             {this.props.results.map(cuisine => <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>)}
         </select>
