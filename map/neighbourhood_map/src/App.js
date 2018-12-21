@@ -34,8 +34,11 @@ class App extends Component {
   }
 
   updateRestaurants(restaurants, value) {
-    if(restaurants){let newRestaurants = restaurants.filter(restaurant => restaurant.categories[0].id === value);
-    this.setState({venues: newRestaurants})}
+    if(value !== 'all'){let newRestaurants = restaurants.filter(restaurant => restaurant.categories[0].id === value);
+    this.setState({venues: newRestaurants})
+  } else {
+    this.setState({venues: restaurants})
+  }
     this.loadMap();
     window.initMap = this.initMap;
   }
