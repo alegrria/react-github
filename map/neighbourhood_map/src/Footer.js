@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import * as Helper from './Helper';
 
-const Footer = (props) => {
+class Footer extends Component {
 
-  Footer.propTypes = {
-    cuisines: PropTypes.array.isRequired,
-    results: PropTypes.array.isRequired
+  state= {
+    cuisineId: ''
   }
 
-  return (
+  static propTypes = {
+    restos: PropTypes.array.isRequired,
+    results: PropTypes.array.isRequired,
+    updateRestaurants: PropTypes.func.isRequired
+  };
 
-    <div id="footer">
-      <h2>Listings</h2>
-      <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange="updateRestaurants()">
-          {props.results.map(cuisine => <option key={cuisine} value={props.cuisines.find(x => x.id === cuisine).name}>{props.cuisines.find(x => x.id === cuisine).name}</option>)}
-      </select>
-    </div>
-  )
+  handleChange = (event) => {
+    this.props.updateRestaurants(this.props.restos, event.target.value)
+  }
+
+  render (){
+      // console.log(this.props.results)
+      // console.log(this.props.restos)
+      return (
+      <div id="footer">
+        <h2>Listings</h2>
+        <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
+            <option key='all' value='all'>All Restaurants</option>
+            {this.props.results.map(cuisine => <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>)}
+        </select>
+      </div>
+  )}
 }
 
 

@@ -14,14 +14,30 @@ class App extends Component {
 
   state = {
     venues: [],
-    cuisines: []
+    cuisines: [],
+    allVenues:[]
   }
 
+  updateRestaurants = this.updateRestaurants.bind(this)
+
   componentDidMount(){
-    Helper.venues().then(response => {this.setState({ venues: response, cuisines: response.map(function(venue){if(venue.categories[0]){return venue.categories[0].name}else{return 'no info'}}).filter((v, i, a) => a.indexOf(v) === i)});
+    let venues = Helper.venues()
+    venues.then(response => {this.setState({
+      venues: response.filter(venue => venue.categories.length !== 0),
+      cuisines: response.filter(venue => venue.categories.length !== 0).map(function(venue)
+        {return {id: venue.categories[0].id, name: venue.categories[0].name}}),
+      allVenues: response.filter(venue => venue.categories.length !== 0)
+    })
     this.loadMap();
     window.initMap = this.initMap;
     })
+  }
+
+  updateRestaurants(restaurants, value) {
+    if(restaurants){let newRestaurants = restaurants.filter(restaurant => restaurant.categories[0].id === value);
+    this.setState({venues: newRestaurants})}
+    this.loadMap();
+    window.initMap = this.initMap;
   }
 
   loadMap = () => {
@@ -41,7 +57,7 @@ class App extends Component {
         let marker = new google.maps.Marker({
           position: { lat: venue.location.lat, lng: venue.location.lng },
           address: venue.location.address? venue.location.address : 'Hamburg',
-          category: venue.categories[0]? venue.categories[0].name : ' no info about kitchen',
+          category: venue.categories[0]? venue.categories[0].name : 'no info about kitchen',
           map: map,
           venue: venue,
           id: venue.id,
@@ -52,7 +68,16 @@ class App extends Component {
         bounds.extend(marker.position);
         marker.addListener('click', function(){
           populateInfoWindow(this, infowindow)
-        })
+        });
+        marker.addListener('click', function(){
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setAnimation(null);
+          }
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }});
       });
       function populateInfoWindow(marker, infowindow) {
         if (infowindow.marker !== marker) {
@@ -68,13 +93,14 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.venues)
-    console.log(this.state.cuisines)
+    // console.log(this.state.venues)
+    // console.log(Helper.uniqueCategories(this.state.cuisines))
+    // console.log(this.state.cuisines)
     return (
       <div className="App">
         <Header/>
         <div id='map' aria-label="restaurant location map"></div>
-        <Footer cuisines={this.state.cuisines.uniq}/>
+        <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants}/>
       </div>
     );
   }

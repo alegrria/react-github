@@ -3,11 +3,12 @@
 }
 
 #map {
-  height: 80vh;
+  height: 70vh;
   /* padding: 20%; */
 }
 
 #header, #footer {
+  height: 10vh;
   color: azure;
   background-color: darkblue;
   text-align: center;
