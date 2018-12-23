@@ -1,10 +1,5 @@
 /*global google*/
-/*
-thank you
-Elharony for thorough explanation why initMap doesn't work straight away https://www.youtube.com/watch?v=W5LhLZqj76s
-https://github.com/tomchentw/react-google-maps/issues/434 for solving google not defined error
-linking marker to restaurant's name https://css-tricks.com/forums/topic/clickable-page-links-to-open-markers-on-google-map/
-*/
+
 import React, { Component } from 'react';
 import './App.css';
 import * as Helper from './Helper';
