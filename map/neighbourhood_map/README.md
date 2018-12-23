@@ -19,7 +19,7 @@ Please clone this directory. Then install all project dependencies with
 * Foursquare API
 * Create React App
 
-##Aknowledgements
+## Acknowledgements
 I would like to thank and mention:
 Elharony for thorough explanation why initMap doesn't work straight away https://www.youtube.com/watch?v=W5LhLZqj76s
 https://github.com/tomchentw/react-google-maps/issues/434 for solving google not defined error
