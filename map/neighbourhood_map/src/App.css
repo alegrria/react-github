@@ -2,10 +2,21 @@
   text-align: center;
 }
 
+.flexbox-container {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.flexbox-container > div {
+	width: 75%;
+	padding: 10px;
+}
+
 #map {
-  height: 100vh;
+  /* height: 100vh; */
   float: right;
-  padding: 35%;
+  /* padding: 35%; */
 }
 #footer {
   width: 25%;
