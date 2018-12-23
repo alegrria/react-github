@@ -3,6 +3,7 @@
 thank you
 Elharony for thorough explanation why initMap doesn't work straight away https://www.youtube.com/watch?v=W5LhLZqj76s
 https://github.com/tomchentw/react-google-maps/issues/434 for solving google not defined error
+linking marker to restaurant's name https://css-tricks.com/forums/topic/clickable-page-links-to-open-markers-on-google-map/
 */
 import React, { Component } from 'react';
 import './App.css';
@@ -88,7 +89,7 @@ class App extends Component {
     // console.log(this.state.venues)
     // console.log(Helper.uniqueCategories(this.state.cuisines))
     // console.log(this.state.cuisines)
-    console.log(this.state.markers)
+    // console.log(this.state.markers)
     return (
       <div className="App">
         <Header/>
