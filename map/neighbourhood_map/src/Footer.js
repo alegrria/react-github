@@ -8,11 +8,17 @@ class Footer extends Component {
     restos: PropTypes.array.isRequired,
     results: PropTypes.array.isRequired,
     updateRestaurants: PropTypes.func.isRequired,
-    selection: PropTypes.array.isRequired
+    selection: PropTypes.array.isRequired,
+    markers: PropTypes.array.isRequired
   };
 
   handleChange = (event) => {
     this.props.updateRestaurants(this.props.restos, event.target.value)
+  }
+
+  handleClick = (event) => {
+    let m = this.props.markers.find(marker => marker.id === event.target.id);
+    new window.google.maps.event.trigger( m, 'click' );
   }
 
   render (){
@@ -25,7 +31,7 @@ class Footer extends Component {
             {this.props.results.map(cuisine => <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>)}
         </select>
         <div id='restaurants'>
-          {this.props.selection && this.props.selection.map(venue => <p key={venue.id}>{venue.name}</p>)}
+          {this.props.selection && this.props.selection.map(venue => <a href="#" value= {venue.id} key={venue.id} id={venue.id} onClick={this.handleClick}>{venue.name}</a>)}
         </div>
       </div>
   )}

@@ -15,7 +15,8 @@ class App extends Component {
   state = {
     venues: [],
     cuisines: [],
-    allVenues:[]
+    allVenues:[],
+    markers: []
   }
 
   updateRestaurants = this.updateRestaurants.bind(this)
@@ -47,7 +48,7 @@ class App extends Component {
     // console.log(this.state.venues)
     let map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.548729, lng: 9.978558},
-      zoom: 14
+      zoom: 13
     });
     let markers = [];
     let infowindow = new google.maps.InfoWindow();
@@ -67,7 +68,7 @@ class App extends Component {
         markers.push(marker);
         bounds.extend(marker.position);
         marker.addListener('click', function(){
-          populateInfoWindow(this, infowindow)
+          Helper.populateInfoWindow(marker, infowindow, map)
         });
         marker.addListener('click', function(){
           for (var i = 0; i < markers.length; i++) {
@@ -79,28 +80,20 @@ class App extends Component {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }});
       });
-      function populateInfoWindow(marker, infowindow) {
-        if (infowindow.marker !== marker) {
-          infowindow.marker = marker;
-          infowindow.setContent('<div><h3>'+ marker.name + '</h3>' + marker.address + '<h4>' + marker.category + '</h3></div>');
-          infowindow.open(map, marker);
-          infowindow.addListener('closeclick',function(){
-            infowindow.setMarker = null;
-          });
-        }
-      }
     }
+    this.setState({markers: markers})
   }
 
   render() {
     // console.log(this.state.venues)
     // console.log(Helper.uniqueCategories(this.state.cuisines))
     // console.log(this.state.cuisines)
+    console.log(this.state.markers)
     return (
       <div className="App">
         <Header/>
         <div id='map' aria-label="restaurant location map"></div>
-        <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants} selection={this.state.venues}/>
+        <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants} selection={this.state.venues} markers={this.state.markers}/>
       </div>
     );
   }

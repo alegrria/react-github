@@ -12,3 +12,26 @@ export function uniqueCategories(cuisines){
       return current},[]);
   return result
 }
+
+export function populateInfoWindow(marker, infowindow, map) {
+  if (infowindow.marker !== marker) {
+    infowindow.marker = marker;
+    infowindow.setContent('<div><h3>'+ marker.name + '</h3>' + marker.address + '<h4>' + marker.category + '</h3></div>');
+    infowindow.open(map, marker);
+    infowindow.addListener('closeclick',function(){
+      infowindow.setMarker = null;
+    });
+  }
+}
+export function showOnMap(venue, marker){
+  let restaurantName = document.getElementById(`resto${venue.id}`)
+  restaurantName.addListener('click', function(){
+   if(marker.id === venue.id){
+     if (marker.getAnimation() !== null) {
+       marker.setAnimation(null);
+     } else {
+       marker.setAnimation(window.google.maps.Animation.BOUNCE);
+   }}
+   console.log(restaurantName)
+  });
+}
