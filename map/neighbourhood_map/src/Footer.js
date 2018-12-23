@@ -25,13 +25,15 @@ class Footer extends Component {
       return (
       <div id="footer">
         <h2>Listings</h2>
+        <p>Please select cuisine to show appropriate restaurants</p>
         <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
             <option key='empty' value='nothing'>Nothing selected</option>
             <option key='all' value='all'>All Restaurants</option>
             {this.props.results.map(cuisine => <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>)}
         </select>
+        <br/>
         <div id='restaurants'>
-          {this.props.selection && this.props.selection.map(venue => <a href="#" value= {venue.id} key={venue.id} id={venue.id} onClick={this.handleClick}>{venue.name}</a>)}
+          {this.props.selection && this.props.selection.map(venue => <button value= {venue.id} key={venue.id} id={venue.id} onClick={this.handleClick}>{venue.name}</button>)}
         </div>
       </div>
   )}
