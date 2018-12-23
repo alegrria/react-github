@@ -20,18 +20,7 @@ export function populateInfoWindow(marker, infowindow, map) {
     infowindow.open(map, marker);
     infowindow.addListener('closeclick',function(){
       infowindow.setMarker = null;
+      marker.setAnimation(null)
     });
   }
-}
-export function showOnMap(venue, marker){
-  let restaurantName = document.getElementById(`resto${venue.id}`)
-  restaurantName.addListener('click', function(){
-   if(marker.id === venue.id){
-     if (marker.getAnimation() !== null) {
-       marker.setAnimation(null);
-     } else {
-       marker.setAnimation(window.google.maps.Animation.BOUNCE);
-   }}
-   console.log(restaurantName)
-  });
 }
