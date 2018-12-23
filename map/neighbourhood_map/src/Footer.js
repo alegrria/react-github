@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import * as Helper from './Helper';
 
 class Footer extends Component {
 
@@ -23,7 +22,7 @@ class Footer extends Component {
 
   render (){
       return (
-      <div id="footer">
+      <aside id="footer">
         <h2>Listings</h2>
         <p>Please select cuisine to show appropriate restaurants</p>
         <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
@@ -33,9 +32,9 @@ class Footer extends Component {
         </select>
         <br/>
         <div id='restaurants'>
-          {this.props.selection && this.props.selection.map(venue => <button value= {venue.id} key={venue.id} id={venue.id} onClick={this.handleClick}>{venue.name}</button>)}
+          {this.props.selection && this.props.selection.map(venue => <button data-message={`Information on ${venue.name}`} key={venue.id} id={venue.id} onClick={this.handleClick}>{venue.name}</button>)}
         </div>
-      </div>
+      </aside>
   )}
 }
 

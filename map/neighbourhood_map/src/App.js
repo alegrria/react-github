@@ -86,13 +86,13 @@ class App extends Component {
     // console.log(this.state.cuisines)
     // console.log(this.state.markers)
     return (
-      <div className="App">
+      <main className="App" role="application">
         <Header/>
         <div className="flexbox-container">
           <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants} selection={this.state.venues} markers={this.state.markers}/>
           <div id='map' aria-label="restaurant location map"></div>
         </div>
-      </div>
+      </main>
     );
   }
 }
