@@ -24,3 +24,7 @@ export function populateInfoWindow(marker, infowindow, map) {
     });
   }
 }
+
+export function handleError(error){
+  if(error){alert("Google Maps do not respond. Please try again")}
+}

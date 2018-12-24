@@ -25,7 +25,7 @@ class App extends Component {
         {return {id: venue.categories[0].id, name: venue.categories[0].name}}),
       allVenues: response.filter(venue => venue.categories.length !== 0)
     })
-    this.loadMap()})
+    this.loadMap()}).catch(e => {document.getElementById('map').innerHTML = "<p>Something is wrong with your internet connection. Map cannot be displayed</p>"})
   }
 
   updateRestaurants(restaurants, value) {
@@ -41,7 +41,6 @@ class App extends Component {
   }
 
   initMap = () => {
-    // console.log(this.state.venues)
     let map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 53.548729, lng: 9.978558},
       zoom: 13
@@ -82,7 +81,7 @@ class App extends Component {
 
   render() {
     return (
-      <main className="App" role="application" tabindex={0}>
+      <main className="App" role="application" tabIndex={0}>
         <Header/>
         <div className="flexbox-container">
           <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants} selection={this.state.venues} markers={this.state.markers}/>
@@ -97,6 +96,7 @@ class App extends Component {
     let index = window.document.getElementsByTagName("script")[0];
     let script = window.document.createElement("script");
     script.src = url;
+    script.onerror = Helper.handleError(script.onerror)
     script.async = true;
     script.defer = true;
     index.parentNode.insertBefore(script, index)

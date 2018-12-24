@@ -22,7 +22,7 @@ class Footer extends Component {
 
   render (){
       return (
-      <aside id="footer" tabindex={0}>
+      <aside id="footer" tabIndex={0}>
         <h2>Listings</h2>
         <p>Please select cuisine to show appropriate restaurants</p>
         <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
