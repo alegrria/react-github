@@ -22,7 +22,7 @@ class Footer extends Component {
 
   render (){
       return (
-      <aside id="footer">
+      <aside id="footer" tabindex={0}>
         <h2>Listings</h2>
         <p>Please select cuisine to show appropriate restaurants</p>
         <select id="cuisines-select" name="cuisines" aria-label="selection of cuisines" onChange={this.handleChange}>
@@ -31,7 +31,7 @@ class Footer extends Component {
             {this.props.results.map(cuisine => <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>)}
         </select>
         <br/>
-        <div id='restaurants'>
+        <div id='restaurants'  aria-label='List of selected restaurants. Clicking the name will make the marker on the map bounce'>
           {this.props.selection && this.props.selection.map(venue => <button data-message={`Information on ${venue.name}`} key={venue.id} id={venue.id} onClick={this.handleClick}>{venue.name}</button>)}
         </div>
       </aside>

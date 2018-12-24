@@ -81,12 +81,8 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.venues)
-    // console.log(Helper.uniqueCategories(this.state.cuisines))
-    // console.log(this.state.cuisines)
-    // console.log(this.state.markers)
     return (
-      <main className="App" role="application">
+      <main className="App" role="application" tabindex={0}>
         <Header/>
         <div className="flexbox-container">
           <Footer restos={this.state.allVenues} results={Helper.uniqueCategories(this.state.cuisines)} updateRestaurants={this.updateRestaurants} selection={this.state.venues} markers={this.state.markers}/>
