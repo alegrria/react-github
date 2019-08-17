@@ -4,8 +4,8 @@ import User from './User';
 
 const UserList = (props) => {
   UserList.propTypes = {
-    users: PropTypes.array.isRequired,
-    language: PropTypes.object.isRequired,
+    repos: PropTypes.array.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
   return(
@@ -13,9 +13,9 @@ const UserList = (props) => {
       {props.language &&
         <h2 className="userlist">Users, who use {props.language} in their repositories</h2>
       }
-      <div className="users"> {props.users.map((user) =>
-        <li key={user.id} >
-          <User user={user}/>
+      <div className="users"> {props.repos.map((repo) =>
+        <li key={repo.id} >
+          <User user={repo.owner.login}/>
         </li>
         )}
       </div>
