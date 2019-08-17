@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SearchField from './SearchField';
 import UserList from './UserList';
-import User from './User';
 import * as GitHubAPI from './GitHubAPI';
 import './App.css';
 
@@ -11,19 +10,16 @@ class App extends Component {
     repos: [],
     users: [],
   }
-  componentDidMount(){
-      GitHubAPI.getRepos(this.state.language).then((repos) => {
-        this.setState({
-          repos
-        })
-      })
-    }
+
+  getUsers = () => {
+
+  }
 
   render() {
     return (
       <div className="App">
-        <div className="search"><SearchField/></div>
-        <div className="search"><UserList/></div>
+        <div className="search"><SearchField /></div>
+        <div className="search"><UserList users={this.state.users} language={this.state.language}/></div>
       </div>
     );
   }

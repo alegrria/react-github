@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
-import UserList from './UserList'
+import * as GitHubAPI from './GitHubAPI';
 
 class Search extends Component {
 
   state = {
     language: '',
+    repos: '',
   }
 
+
   setLanguage = (language) => {
-  if (language) {
-    this.setState({
-      language: language,
-    }).catch(function(e) {
-      console.log(e);
-    })
-  } else {
-    this.setState({
-      language: '',
-    })
+    if (language) {
+      GitHubAPI.getRepos(this.state.language).then((repos) => {
+        this.setState({
+          repos: repos,
+        })
+      }).catch(function(e) {
+        console.log(e);
+      })
+    }
   }
-}
+
 
   render() {
     return (
       <div className="search-users">
         <div className="search-users-bar">
-          <button className="close-search" onClick={() => this.props.history.push('/')}>Close</button>
-          <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search users by programming language they use in their repos" value={this.state.language} onChange={(event) => this.setLanguage(event.target.value)}/>
+          <div className="search-users-input-wrapper">
+            <input type="text" placeholder="Search users by programming language they use in their repos" value={this.state.language} onChange={(event) => this.setState({language: event.target.value})}/>
+            <button className="open-search" variant="primary" onClick={this.setLanguage(this.state.language)}>
+              Search
+            </button>
           </div>
         </div>
       </div>

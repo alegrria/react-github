@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import User from './User';
 
@@ -9,13 +9,17 @@ const UserList = (props) => {
   }
 
   return(
-    <div className="userlist">
-    <h2 className="userlist">Users, who use {props.language} in their repositories</h2>
-    <div className="users"> {props.users.map((user) =>
-      <User user={user}/>
-      )}
+    <div className="search-users-results">
+      {props.language &&
+        <h2 className="userlist">Users, who use {props.language} in their repositories</h2>
+      }
+      <div className="users"> {props.users.map((user) =>
+        <li key={user.id} >
+          <User user={user}/>
+        </li>
+        )}
+      </div>
     </div>
-  </div>
   )
 }
 
