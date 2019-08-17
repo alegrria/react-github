@@ -11,9 +11,7 @@ class App extends Component {
   }
 
   getRepositories = (language) => {
-    console.log(language)
     GitHubAPI.getRepos(language).then((repos) => {
-      console.log("eee"+ repos)
       this.setState({
         repos: repos,
         language: language,
@@ -21,11 +19,7 @@ class App extends Component {
     })
   }
   getRepositories = this.getRepositories.bind(this)
-
-  prepareUsers = () => {
-
-  }
-
+  
   render() {
     return (
       <div className="App">
