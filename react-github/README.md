@@ -9,6 +9,6 @@ To start the server run `npm start`
 
 ### Information about the app
 Built with:
-*React
-*Javascript
-*GitHub API
+* React
+* Javascript
+* GitHub API
