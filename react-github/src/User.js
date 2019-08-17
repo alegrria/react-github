@@ -10,27 +10,36 @@ class User extends Component {
     }
   }
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.string.isRequired,
   };
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     GitHubAPI.getUser(this.props.user).then((user) => {
       this.setState({
         github_user: user,
       })
     })
   }
+
   render() {
-    return (
-      <li key={this.props.user.id} >
-        <div className="user">
-          <div className="user-name">Name is {this.state.github_user.name}</div>
-          <div className="user-username">Username is {this.state.github_user.login}</div>
-          <div className="user-username">See the avatar: {this.state.github_user.avatar_url}</div>
-          <div className="user-username">Followed by: {this.state.github_user.followers}</div>
-        </div>
-      </li>
-    )
+    if (this.state.github_user === "undefined") {
+      console.log("1"+this.state.github_user)
+      return (
+        <div className="user">Almost there</div>
+      )
+    } else {
+      console.log("2"+this.state.github_user)
+      return (
+        <li key={this.props.user.id} >
+          <div className="user">
+            <div className="user-name">Name is {this.state.github_user.name}</div>
+            <div className="user-username">Username is {this.state.github_user.login}</div>
+            <div className="user-username">See the avatar: {this.state.github_user.avatar_url}</div>
+            <div className="user-username">Followed by: {this.state.github_user.followers}</div>
+          </div>
+        </li>
+      )
+    }
   }
 };
 

@@ -11,7 +11,7 @@ export const getRepos = (language) =>
 export const getUser = (username) =>
   fetch(`${api}/users/${username}`)
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => data)
       .catch(function(e) {
         console.log(e);
       })
