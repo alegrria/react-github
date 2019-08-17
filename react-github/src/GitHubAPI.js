@@ -1,6 +1,6 @@
-const api = "https://api.github.com/"
+const repos = "https://https://api.github.com/search/repositories?q=language:"
 
-export const getUsers = () =>
-  fetch(`${api}/users`)
+export const getRepos = (language) =>
+  fetch(`${repos}${language}`)
       .then(res => res.json())
-      .then(data => data.books)
+      .then(data => data.repos)

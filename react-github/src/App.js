@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import SearchField from './SearchField';
 import UserList from './UserList';
 import User from './User';
+import * as GitHubAPI from './GitHubAPI';
 import './App.css';
 
 class App extends Component {
   state = {
-    users: []
+    language: '',
+    repos: [],
+    users: [],
   }
   componentDidMount(){
-      GitHubAPI.getUsers().then((users) => {
+      GitHubAPI.getRepos(this.state.language).then((repos) => {
         this.setState({
-          users
+          repos
         })
       })
     }
