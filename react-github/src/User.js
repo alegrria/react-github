@@ -32,10 +32,10 @@ class User extends Component {
       return (
         <li key={this.props.user.id} >
           <div className="user">
-            <div className="user-name">Name is {this.state.github_user.name}</div>
-            <div className="user-username">Username is {this.state.github_user.login}</div>
-            <div className="user-username">See the avatar: {this.state.github_user.avatar_url}</div>
-            <div className="user-username">Followed by: {this.state.github_user.followers}</div>
+            <div className="user-name">Name is: {this.state.github_user.name}</div>
+            <div className="user-username">Username is: {this.state.github_user.login}</div>
+            <div className="user-avatar-url">See the avatar: {this.state.github_user.avatar_url}</div>
+            <div className="user-followers">Followed by: {this.state.github_user.followers}</div>
           </div>
         </li>
       )
