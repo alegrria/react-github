@@ -13,7 +13,7 @@ class User extends Component {
     user: PropTypes.string.isRequired,
   };
 
-  UNSAFE_componentWillMount = () => {
+  componentDidMount = () => {
     GitHubAPI.getUser(this.props.user).then((user) => {
       this.setState({
         github_user: user,
@@ -23,12 +23,10 @@ class User extends Component {
 
   render() {
     if (this.state.github_user === "undefined") {
-      console.log("1"+this.state.github_user)
       return (
-        <div className="user">Almost there</div>
+        <div className="user-wait">Almost there</div>
       )
     } else {
-      console.log("2"+this.state.github_user)
       return (
         <li key={this.props.user.id} >
           <div className="user">
